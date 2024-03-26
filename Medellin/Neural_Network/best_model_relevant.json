@@ -1,0 +1,1 @@
+{"model__activation": "sigmoid", "model__neurons": 10, "model__optimizer": "Nadam"}
