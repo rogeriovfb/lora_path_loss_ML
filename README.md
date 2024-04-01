@@ -52,18 +52,122 @@ Given the substantial volume of data, efforts were made to isolate the most rele
 For access to the raw data, please refer to the original 
 [GitHub repository](https://github.com/magonzalezudem/MDPI_LoRaWAN_Dataset_With_Environmental_Variables).
 
+
+Rogerio Ballestrin <ballestrin.rogerio@gmail.com>
+qui., 28 de mar., 10:43 (há 4 dias)
+para mim
+
 ## Algorithms and Results
 
 ### Baseline
 
+The log-distance model serves as a fundamental baseline for predicting path loss in wireless communication systems. It is based on the empirical observation that signal strength decays logarithmically with distance from the transmitter, often expressed as:
+
+PL(d) = PL(d_0) + 10 * n * log_{10}(d/d_0) + X_f
+
+
+Where:
+- PL(d) is the path loss at distance d.
+- PL(d_0) is the path loss at reference distance d_0.
+- n is the path loss exponent.
+- d is the distance from the transmitter.
+- d_0 is the reference distance.
+- X_f is a zero-mean Gaussian random variable representing shadowing effects.
+
+The log-distance model assumes that the path loss exponent n and the reference path loss PL(d_0) are constants for a given environment. However, it does not account for specific environmental factors or variations in propagation characteristics.
+
+To establish a baseline for comparison, we applied the log-distance model to both dataset and evaluated its performance in terms of Mean Absolute Error (MAE) and Root Mean Squared Error (RMSE).
+
+MCLAB dataset:
+- MAE: 7.80 dBm
+- RMSE: 9.78 dBm
+
+Medellin dataset:
+- MAE: 2.00 dBm
+- RMSE: 2.47 dBm
+
+Next, we present the results of the machine learning algorithms applied to the same dataset for a comprehensive comparative analysis.
+
 ### Decision Tree
+
+MCLAB dataset:
+- MAE: 5.06 dBm
+- RMSE:7.05 dBm
+
+Medellin dataset with all data:
+- MAE:
+- RMSE
+
+Medellin dataset with relevant factors only:
+- MAE:
+- RMSE
 
 ### Lasso Regression
 
+MCLAB dataset:
+- MAE:7.43 dBm
+- RMSE:9.41 dBm
+
+Medellin dataset with all data:
+- MAE:
+- RMSE
+
+Medellin dataset with relevant factors only:
+- MAE:
+- RMSE
+
 ### Neural network
+
+MCLAB dataset:
+- MAE: 6.25 dBm
+- RMSE: 7.83 dBm
+
+Medellin dataset with all data:
+- MAE:
+- RMSE
+
+Medellin dataset with relevant factors only:
+- MAE:
+- RMSE
 
 ### Random Forest
 
+MCLAB dataset:
+- MAE: 5.23 dBm
+- RMSE: 6.78 dBm
+
+Medellin dataset with all data:
+- MAE:
+- RMSE
+
+Medellin dataset with relevant factors only:
+- MAE:
+- RMSE
+
 ### Support Vector Regression (SVR)
 
+MCLAB dataset (kernel RBF):
+- MAE: 6.29 dBm
+- RMSE:8.12 dBm
+
+Medellin dataset with all data:
+- MAE:
+- RMSE:
+
+Medellin dataset with relevant factors only:
+- MAE:
+- RMSE:
+
 ### XGBOOST
+
+MCLAB dataset:
+- MAE: 5.27 dBm
+- RMSE: 6.79 dBm
+
+Medellin dataset with all data:
+- MAE:
+- RMSE:
+
+Medellin dataset with relevant factors only:
+- MAE:
+- RMSE:
