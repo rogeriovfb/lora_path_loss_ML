@@ -45,7 +45,8 @@ def import_dataset_mclab():
     X_train, X_test, y_train, y_test = train_test_split(X_scaler, y,
                                                         test_size=0.25,
                                                         random_state=0)
-    return X_train, X_test, y_train, y_test
+    save_model(scaler, 'scaler_mclab.sav')
+    return X_train, X_test, y_train, y_test, scaler
 
 
 def import_dataset_medellin():

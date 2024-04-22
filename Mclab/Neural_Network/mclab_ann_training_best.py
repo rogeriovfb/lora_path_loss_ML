@@ -4,7 +4,7 @@ from utils import print_RMSE_MAE, save_model, import_dataset_mclab
 from keras.models import Sequential
 from keras.layers import Dense
 
-X_train, X_test, y_train, y_test = import_dataset_mclab()
+X_train, X_test, y_train, y_test = import_dataset_mclab()[:4]
 
 
 # create ANN model

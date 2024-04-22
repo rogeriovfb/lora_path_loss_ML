@@ -3,7 +3,7 @@ import numpy as np
 from utils import print_RMSE_MAE, save_model, import_dataset_mclab
 import xgboost as xg
 
-X_train, X_test, y_train, y_test = import_dataset_mclab()
+X_train, X_test, y_train, y_test = import_dataset_mclab()[:4]
 
 X=[]
 Y=[]
