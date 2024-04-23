@@ -1,5 +1,7 @@
 import matplotlib.pyplot as plt
-from plot_medellin import plot_IA_model
+from plot_medellin import plot_IA_model, plot_classic_models
+import classic_models
+
 
 models_all = [
     '../Neural_Network/medellin_ann_relevant.sav',
@@ -20,4 +22,21 @@ titulos = ['Rede Neural', "Árvore de Decisão", "Regressão Lasso",
 for index, model in enumerate(models_all):
     print(titulos[index])
     plot_IA_model(model, titulos[index])
+
+
+modelos_classicos = [classic_models.path_loss_free_space, classic_models.path_loss_egli,
+                     classic_models.path_loss_okumura_hata, classic_models.path_loss_cost231_hata,
+                     classic_models.path_loss_log_distance]
+
+isLogDistance = [False, False, False, False, True]
+
+titulos_classicos = ['Free Space', 'Egli', 'Okumura Hata', 'Cost231 Hata', 'Log Distance']
+
+
+for index, model in enumerate(modelos_classicos):
+    print(titulos_classicos[index])
+    plot_classic_models(model, titulos_classicos[index], isLogDistance[index])
+
+
 plt.show()
+
