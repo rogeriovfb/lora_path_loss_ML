@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from utils import import_dataset_mclab
+from utils import import_dataset_mclab, print_RMSE_MAE
 import joblib
 
 
@@ -38,4 +38,5 @@ def plot_IA_model (file_model, modelo):
 
     # Adicionando grid
     ax.grid(True, linestyle='--', alpha=0.5)
+    print_RMSE_MAE(y_test, result)
 

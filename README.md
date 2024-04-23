@@ -53,10 +53,6 @@ For access to the raw data, please refer to the original
 [GitHub repository](https://github.com/magonzalezudem/MDPI_LoRaWAN_Dataset_With_Environmental_Variables).
 
 
-Rogerio Ballestrin <ballestrin.rogerio@gmail.com>
-qui., 28 de mar., 10:43 (há 4 dias)
-para mim
-
 ## Algorithms and Results
 
 ### Baseline
@@ -94,13 +90,14 @@ MCLAB dataset:
 - MAE: 5.06 dBm
 - RMSE:7.05 dBm
 
+
 Medellin dataset with all data:
 - MAE:
 - RMSE
 
 Medellin dataset with relevant factors only:
 - MAE:
-- RMSE
+- RMSE: 
 
 ### Lasso Regression
 
@@ -171,3 +168,4 @@ Medellin dataset with all data:
 Medellin dataset with relevant factors only:
 - MAE:
 - RMSE:
+

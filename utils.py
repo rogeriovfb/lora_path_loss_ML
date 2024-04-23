@@ -6,23 +6,13 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 import zipfile
 
+
 def print_RMSE_MAE(y_test, result):
+    result = result.reshape(len(result),)
     mae = np.mean(np.abs(y_test - result))
-    print("MAE :", mae)
+    print("MAE: {:.2f} dB".format(mae))
     rmse = np.sqrt(np.mean(np.square(y_test - result)))
-    print("RMSE:",rmse)
-
-
-def plot_pred_med(X_test, y_test, result, titulo): #TODO
-    plt.figure()
-    X_plot = X_test
-    plt.plot(X_plot[:,0], y_test, 'g*', label='Medição')
-    plt.plot(X_plot[:,0], result, 'b*', label='Predição')
-
-    plt.title(titulo)
-    plt.xlabel('Distancia [km]')
-    plt.ylabel('Path Loss [dBm]')
-    plt.legend(loc='best',fancybox=True, shadow=True)
+    print("RMSE: {:.2f} dB".format(rmse))
 
 
 def save_model (model, filename):
