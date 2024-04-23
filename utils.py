@@ -64,4 +64,5 @@ def import_dataset_medellin():
     X_train_sig, X_test_sig, y_train_sig, y_test_sig = train_test_split(X_norm_sig, y_sig,
                                                                         test_size=0.25,
                                                                         random_state=0)
-    return X_train_todos, X_test_todos, y_train_todos, y_test_todos, X_train_sig, X_test_sig, y_train_sig, y_test_sig
+    return X_train_todos, X_test_todos, y_train_todos, y_test_todos, X_train_sig, X_test_sig, y_train_sig, y_test_sig, \
+           normalizacao_todos, normalizacao_sig

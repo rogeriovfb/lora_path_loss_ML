@@ -75,97 +75,96 @@ The log-distance model assumes that the path loss exponent n and the reference p
 To establish a baseline for comparison, we applied the log-distance model to both dataset and evaluated its performance in terms of Mean Absolute Error (MAE) and Root Mean Squared Error (RMSE).
 
 MCLAB dataset:
-- MAE: 7.80 dBm
-- RMSE: 9.78 dBm
+- MAE: 7.80 dB
+- RMSE: 9.78 dB
 
 Medellin dataset:
-- MAE: 2.00 dBm
-- RMSE: 2.47 dBm
+- MAE: 2.00 dB
+- RMSE: 2.47 dB
 
 Next, we present the results of the machine learning algorithms applied to the same dataset for a comprehensive comparative analysis.
 
 ### Decision Tree
 
 MCLAB dataset:
-- MAE: 5.06 dBm
-- RMSE:7.05 dBm
-
+- MAE: 5.06 dB
+- RMSE:7.05 dB
 
 Medellin dataset with all data:
 - MAE:
-- RMSE
+- RMSE: 
 
 Medellin dataset with relevant factors only:
-- MAE:
-- RMSE: 
+- MAE: 1.90 dB
+- RMSE: 2.35 dB
 
 ### Lasso Regression
 
 MCLAB dataset:
-- MAE:7.43 dBm
-- RMSE:9.41 dBm
+- MAE:7.43 dB
+- RMSE:9.41 dB
 
 Medellin dataset with all data:
 - MAE:
 - RMSE
 
 Medellin dataset with relevant factors only:
-- MAE:
-- RMSE
+- MAE: 2.21 dB
+- RMSE: 2.74 dB
 
 ### Neural network
 
 MCLAB dataset:
-- MAE: 6.25 dBm
-- RMSE: 7.83 dBm
+- MAE: 6.25 dB
+- RMSE: 7.83 dB
 
 Medellin dataset with all data:
 - MAE:
 - RMSE
 
 Medellin dataset with relevant factors only:
-- MAE:
-- RMSE
+- MAE: 1.95 dB
+- RMSE: 2.40 dB
 
 ### Random Forest
 
 MCLAB dataset:
-- MAE: 5.23 dBm
-- RMSE: 6.78 dBm
+- MAE: 5.23 dB
+- RMSE: 6.78 dB
 
 Medellin dataset with all data:
 - MAE:
 - RMSE
 
 Medellin dataset with relevant factors only:
-- MAE:
-- RMSE
+- MAE: 1.90 dB
+- RMSE: 2.35 dB
 
 ### Support Vector Regression (SVR)
 
 MCLAB dataset (kernel RBF):
-- MAE: 6.29 dBm
-- RMSE:8.12 dBm
+- MAE: 6.29 dB
+- RMSE:8.12 dB
 
 Medellin dataset with all data:
 - MAE:
 - RMSE:
 
 Medellin dataset with relevant factors only:
-- MAE:
-- RMSE:
+- MAE: 1.88 dB
+- RMSE: 2.37 dB
 
 ### XGBOOST
 
 MCLAB dataset:
-- MAE: 5.27 dBm
-- RMSE: 6.79 dBm
+- MAE: 5.27 dB
+- RMSE: 6.79 dB
 
 Medellin dataset with all data:
 - MAE:
 - RMSE:
 
 Medellin dataset with relevant factors only:
-- MAE:
-- RMSE:
+- MAE: 2.01 dB
+- RMSE: 2.49 dB
 
