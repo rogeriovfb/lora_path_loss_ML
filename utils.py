@@ -40,11 +40,16 @@ def import_dataset_mclab():
     return X_train, X_test, y_train, y_test, scaler
 
 
-def import_dataset_medellin():
+def import_dataset_medellin_raw():
     zf = zipfile.ZipFile('..\\..\\Data\\dataset_medellin.zip')
     dataset = pd.read_csv(zf.open('dataset_medellin.csv'))
 
     dataset['hora'] = pd.to_datetime(dataset['timestamp'], format='%d/%m/%Y %H:%M').dt.hour
+    return dataset
+
+
+def import_dataset_medellin():
+    dataset = import_dataset_medellin_raw()
 
     X_col = ['distance', 'hora', "ht", "frequency", "sf", "frame_length", "temperature", "rh", "bp", "pm2_5", "toa"]
     X = dataset[X_col]
