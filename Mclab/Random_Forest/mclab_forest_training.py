@@ -5,14 +5,13 @@ from utils import print_RMSE_MAE, save_model, import_dataset_mclab
 
 X_train, X_test, y_train, y_test = import_dataset_mclab()[:4]
 
-X=[]
-Y=[]
-Z=[]
+
 max_depth = 20
 max_estimators = 70
-
-for i in range (1,max_depth):
-    for k in range (1,max_estimators):
+results = dict()
+for i in range(1, max_depth):
+    print('Loop {} of {}'.format(i, max_depth))
+    for k in range(1, max_estimators):
         regressor = RandomForestRegressor(n_estimators=k,
                                         max_depth=i,
                                         random_state=0)
@@ -25,13 +24,11 @@ for i in range (1,max_depth):
         # RMSE
         square_error = np.square(np.subtract(y_test, result)).mean()
         rmse = np.sqrt(square_error)
-        X.append(i)
-        Y.append(k)
-        Z.append(rmse)
+        results[(i, k)] = rmse
 
-index_best_rmse = Z.index(min(Z))
-regressor = RandomForestRegressor(n_estimators=Y[index_best_rmse],
-                                    max_depth=X[index_best_rmse],
+best_hyperparams = min(results, key=results.get)
+regressor = RandomForestRegressor(n_estimators=best_hyperparams[1],
+                                    max_depth=best_hyperparams[0],
                                     random_state=0)
 
 regressor.fit(X_train, y_train)
@@ -39,3 +36,4 @@ result = regressor.predict(X_test)
 
 print_RMSE_MAE(y_test, result)
 save_model(regressor, 'mclab_forest.sav')
+save_model(results, 'mclab_forest_hiperp.sav')

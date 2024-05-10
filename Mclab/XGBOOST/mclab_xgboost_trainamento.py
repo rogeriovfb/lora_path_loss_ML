@@ -5,13 +5,12 @@ import xgboost as xg
 
 X_train, X_test, y_train, y_test = import_dataset_mclab()[:4]
 
-X=[]
-Y=[]
-Z=[]
 max_depth = 30
 max_estimators = 40
+results = dict()
 
 for i in range (1,max_depth):
+    print('Loop {} of {}'.format(i, max_depth))
     for k in range (1,max_estimators):
         regressor = xg.XGBRegressor(n_estimators=k,
                              max_depth=i,
@@ -27,14 +26,11 @@ for i in range (1,max_depth):
         # RMSE
         square_error = np.square(np.subtract(y_test, result)).mean()
         rmse = np.sqrt(square_error)
-        X.append(i)
-        Y.append(k)
-        Z.append(rmse)
+        results[(i, k)] = rmse
 
-
-index_best_rmse = Z.index(min(Z))
-regressor =  xg.XGBRegressor(n_estimators=Y[index_best_rmse],
-                             max_depth=X[index_best_rmse],
+best_hyperparams = min(results, key=results.get)
+regressor =  xg.XGBRegressor(n_estimators=best_hyperparams[1],
+                             max_depth=best_hyperparams[0],
                              eta=0.1,
                              subsample=1,
                              colsample_bytree=1)
@@ -45,4 +41,4 @@ result = regressor.predict(X_test)
 
 print_RMSE_MAE(y_test, result)
 save_model(regressor, 'mclab_xgboost.sav')
-
+save_model(results, 'mclab_xgboost_hiperp.sav')

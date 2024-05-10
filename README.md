@@ -91,8 +91,8 @@ MCLAB dataset:
 - RMSE:7.05 dB
 
 Medellin dataset with all data:
-- MAE:
-- RMSE: 
+- MAE: 1.36 dB
+- RMSE: 1.77 dB
 
 Medellin dataset with relevant factors only:
 - MAE: 1.90 dB
@@ -133,8 +133,8 @@ MCLAB dataset:
 - RMSE: 6.78 dB
 
 Medellin dataset with all data:
-- MAE:
-- RMSE
+- MAE: 1.18 dB
+- RMSE: 1.51 dB
 
 Medellin dataset with relevant factors only:
 - MAE: 1.90 dB
@@ -161,10 +161,10 @@ MCLAB dataset:
 - RMSE: 6.79 dB
 
 Medellin dataset with all data:
-- MAE:
-- RMSE:
+- MAE: 1.29 dB
+- RMSE: 1.65 dB
 
 Medellin dataset with relevant factors only:
-- MAE: 2.01 dB
-- RMSE: 2.49 dB
+- MAE: 1.93 dB
+- RMSE: 2.40 dB
 

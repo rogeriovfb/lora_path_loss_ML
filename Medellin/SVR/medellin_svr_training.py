@@ -5,7 +5,7 @@ from sklearn.svm import SVR
 from utils import print_RMSE_MAE, save_model, import_dataset_medellin
 
 X_train_all, X_test_all, y_train_all, y_test_all, \
-X_train_relevant, X_test_relevant, y_train_relevant, y_test_relevant = import_dataset_medellin()
+X_train_relevant, X_test_relevant, y_train_relevant, y_test_relevant = import_dataset_medellin()[:8]
 
 ############  SIGMOID   ############
 

@@ -4,17 +4,18 @@ import xgboost as xg
 from utils import print_RMSE_MAE, save_model, import_dataset_medellin
 
 X_train_all_data, X_test_all_data, y_train_all_data, y_test_all_data, \
-X_train_relevant, X_test_relevant, y_train_relevant, y_test_relevant = import_dataset_medellin()
+X_train_relevant, X_test_relevant, y_train_relevant, y_test_relevant = import_dataset_medellin()[:8]
 
-X=[]
-Y=[]
-Z_all_data=[]
-Z_relevant=[]
 max_depth = 25
-max_estimators = 20
+max_estimators = 25
 
-for i in range (1,max_depth):
-    for k in range (1,max_estimators):
+results_all_data = dict()
+results_relevant = dict()
+
+
+for i in range(1, max_depth):
+    print('Loop {} of {}'.format(i, max_depth))
+    for k in range(1, max_estimators):
         regressor_all_data = xg.XGBRegressor(n_estimators=k,
                              max_depth=i,
                              eta=0.1,
@@ -41,18 +42,17 @@ for i in range (1,max_depth):
 
         square_error_relevant = np.square(np.subtract(y_test_relevant, result_relevant)).mean()
         rmse_relevant = np.sqrt(square_error_relevant)
+        results_all_data[(i, k)] = rmse_all_data
+        results_relevant[(i, k)] = rmse_relevant
 
-        X.append(i)
-        Y.append(k)
-        Z_all_data.append(rmse_all_data)
-        Z_relevant.append(rmse_relevant)
 
-index_best_rmse_relevant = Z_relevant.index(min(Z_relevant))
-index_best_rmse_all_data = Z_all_data.index(min(Z_all_data))
+best_hyperparams_all_data = min(results_all_data, key=results_all_data.get)
+best_hyperparams_relevant = min(results_relevant, key=results_relevant.get)
+
 
 # Fit regression model
-regressor_all_data = xg.XGBRegressor(n_estimators=Y[index_best_rmse_all_data],
-                                    max_depth=X[index_best_rmse_all_data],
+regressor_all_data = xg.XGBRegressor(n_estimators=best_hyperparams_all_data[1],
+                                    max_depth=best_hyperparams_all_data[0],
                                     eta=0.1,
                                     subsample=1,
                                     colsample_bytree=1)
@@ -62,8 +62,8 @@ regressor_all_data.fit(X_train_all_data, y_train_all_data)
 # Predict
 result_all_data = regressor_all_data.predict(X_test_all_data)
 
-regressor_relevant = xg.XGBRegressor(n_estimators=Y[index_best_rmse_relevant],
-                                    max_depth=X[index_best_rmse_relevant],
+regressor_relevant = xg.XGBRegressor(n_estimators=best_hyperparams_relevant[1],
+                                    max_depth=best_hyperparams_relevant[0],
                                     eta=0.1,
                                     subsample=1,
                                     colsample_bytree=1)
@@ -79,3 +79,5 @@ print_RMSE_MAE(y_test_relevant, result_relevant)
 
 save_model(regressor_all_data, 'medellin_xgboost_all_data.sav')
 save_model(regressor_relevant, 'medellin_xgboost_relevant.sav')
+save_model(results_all_data, 'medellin_xgboost_hiperp_all_data.sav')
+save_model(results_relevant, 'medellin_xgboost_hiperp_relevant.sav')
