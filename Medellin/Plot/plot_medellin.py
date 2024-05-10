@@ -80,3 +80,31 @@ def plot_classic_models(model, titulo, log_distance: bool):
     plt.legend(loc='best', fancybox=True, shadow=True)
     plt.grid(True, linestyle='--', alpha=0.5)
 
+def plot_hiperp_2D(results_file, title='', xlabel=''):
+    results_dict = joblib.load(results_file)
+    x_values = list(results_dict.keys())
+    error_list = list(results_dict.values())
+
+    # Plotar o gráfico da busca do hiperparâmetro alpha
+    plt.figure(figsize=(12, 8))  # Aumentar o tamanho da figura
+    plt.plot(x_values, error_list, color='blue', linestyle='-', linewidth=2)
+
+    # Adicionar ponto com menor RMSE (marcador de estrela vermelha)
+    min_rmse_index = np.argmin(error_list)
+    min_rmse_alpha = x_values[min_rmse_index]
+    min_rmse_value = error_list[min_rmse_index]
+    plt.scatter(min_rmse_alpha, min_rmse_value, color='red', marker='*', s=200, label='Menor RMSE')
+
+    # Adicionar texto com o valor da coordenada do ponto mínimo
+    plt.text(min_rmse_alpha, min_rmse_value, f'({min_rmse_alpha:.2f}, {min_rmse_value:.2f})', fontsize=12,
+             ha='center', va='top', color='black', weight='bold')
+
+    # Estilização do gráfico
+    plt.title(title, fontsize=18)  # Aumentar o tamanho do título
+    plt.xlabel(xlabel, fontsize=16)  # Aumentar o tamanho do rótulo do eixo X
+    plt.ylabel('RMSE [dB]', fontsize=16)  # Aumentar o tamanho do rótulo do eixo Y
+    plt.xticks(fontsize=14)  # Aumentar o tamanho dos números no eixo X
+    plt.yticks(fontsize=14)  # Aumentar o tamanho dos números no eixo Y
+    plt.grid(True, linestyle='--', alpha=0.5)
+    plt.legend(fontsize=14)
+

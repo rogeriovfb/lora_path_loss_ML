@@ -105,8 +105,8 @@ MCLAB dataset:
 - RMSE:9.41 dB
 
 Medellin dataset with all data:
-- MAE:
-- RMSE
+- MAE: 1.96 dB
+- RMSE: 2.40 dB
 
 Medellin dataset with relevant factors only:
 - MAE: 2.21 dB

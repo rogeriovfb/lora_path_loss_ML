@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from plot_medellin import plot_IA_model, plot_classic_models
+from plot_medellin import plot_IA_model, plot_classic_models, plot_hiperp_2D
 import classic_models
 
 
@@ -19,9 +19,9 @@ titulos = ['Rede Neural', "Árvore de Decisão", "Regressão Lasso",
            'Floresta Aleatória', 'SVR (Kernel Sigmoide)', 'SVR (Kernel RBF)', 'SVR (Kernel Polinomial)',
            'SVR (Kernel Linear)', 'XGBOOST']
 
-for index, model in enumerate(models_all):
-    print(titulos[index])
-    plot_IA_model(model, titulos[index])
+#for index, model in enumerate(models_all):
+#    print(titulos[index])
+#    plot_IA_model(model, titulos[index])
 
 
 modelos_classicos = [classic_models.path_loss_free_space, classic_models.path_loss_egli,
@@ -33,10 +33,15 @@ isLogDistance = [False, False, False, False, True]
 titulos_classicos = ['Free Space', 'Egli', 'Okumura Hata', 'Cost231 Hata', 'Log Distance']
 
 
-for index, model in enumerate(modelos_classicos):
-    print(titulos_classicos[index])
-    plot_classic_models(model, titulos_classicos[index], isLogDistance[index])
+#for index, model in enumerate(modelos_classicos):
+#    print(titulos_classicos[index])
+#    plot_classic_models(model, titulos_classicos[index], isLogDistance[index])
 
+#plot_hiperp_2D('../Lasso_Regression/medellin_lasso_hiperp_all_data.sav',
+#               'RMSE x Alpha da Regressão Lasso', 'Alpha')
+
+plot_hiperp_2D('../Lasso_Regression/medellin_lasso_hiperp_relevant.sav',
+               'RMSE x Alpha da Regressão Lasso', 'Alpha')
 
 plt.show()
 
