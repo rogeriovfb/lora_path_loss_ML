@@ -1,0 +1,24 @@
+Sigmoid_all:
+MAE: 2682.72 dB
+RMSE: 4074.42 dB
+Sigmoid_relevant:
+MAE: 13239.45 dB
+RMSE: 20798.34 dB
+RBF_all:
+MAE: 1.53 dB
+RMSE: 1.96 dB
+RBF_relevant:
+MAE: 1.88 dB
+RMSE: 2.37 dB
+Poly_all:
+MAE: 1.53 dB
+RMSE: 1.96 dB
+Poly_relevant:
+MAE: 2.58 dB
+RMSE: 3.19 dB
+Linear_all:
+MAE: 1.96 dB
+RMSE: 2.41 dB
+Linear_relevant:
+MAE: 2.67 dB
+RMSE: 3.34 dB

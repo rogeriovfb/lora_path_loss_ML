@@ -3,7 +3,7 @@ from keras.models import Sequential
 from keras.layers import Dense
 
 X_train_all_data, X_test_all_data, y_train_all_data, y_test_all_data, \
-X_train_relevant, X_test_relevant, y_train_relevant, y_test_relevant = import_dataset_medellin()
+X_train_relevant, X_test_relevant, y_train_relevant, y_test_relevant = import_dataset_medellin()[:8]
 
 
 
