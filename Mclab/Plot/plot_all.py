@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 from plot_mclab import plot_IA_model, plot_classic_models, plot_hiperp_2D, plot_hiperp_3D
 import classic_models
-
+from utils import plot_mclab_dataframe
 
 modelos_ia = [
     '../Neural_Network/mclab_ann_best.sav',
@@ -39,9 +39,9 @@ titulos_classicos = ['Free Space', 'Egli', 'Okumura Hata', 'Cost231 Hata', 'Log 
 #    plot_classic_models(model, titulos_classicos[index], isLogDistance[index])
 
 
-plot_hiperp_2D('../Lasso_Regression/mclab_lasso_hiperp.sav', 'RMSE x Alpha da Regressão Lasso', 'Alpha')
-plot_hiperp_2D('../Decision_Tree/mclab_tree_hiperp.sav', 'RMSE x Profundidade da Árvore', 'Profundidade')
-plot_hiperp_3D('../XGBOOST/mclab_xgboost_hiperp.sav', 'RMSE x Hiperparâmetros do XGBOOST', 'Profundidade', 'Estimadores')
-plot_hiperp_3D('../Random_Forest/mclab_forest_hiperp.sav', 'RMSE x Hiperparâmetros da Floresta Aleatória', 'Profundidade', 'Estimadores')
-
+#lot_hiperp_2D('../Lasso_Regression/mclab_lasso_hiperp.sav', 'RMSE x Alpha da Regressão Lasso', 'Alpha')
+plot_hiperp_2D('../Decision_Tree/mclab_tree_hiperp.sav', 'RMSE x Max Depth', 'Max Depth')
+#plot_hiperp_3D('../XGBOOST/mclab_xgboost_hiperp.sav', 'RMSE x Hiperparâmetros do XGBOOST', 'Profundidade', 'Estimadores')
+#plot_hiperp_3D('../Random_Forest/mclab_forest_hiperp.sav', 'RMSE x Hiperparâmetros da Floresta Aleatória', 'Profundidade', 'Estimadores')
+#plot_mclab_dataframe()
 plt.show()

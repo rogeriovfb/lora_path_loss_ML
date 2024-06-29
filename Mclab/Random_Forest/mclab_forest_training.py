@@ -3,7 +3,7 @@ from sklearn.ensemble import RandomForestRegressor
 
 from utils import print_RMSE_MAE, save_model, import_dataset_mclab
 
-X_train, X_test, y_train, y_test = import_dataset_mclab()[:4]
+X_train, X_test, X_val, y_train, y_test, y_val = import_dataset_mclab()[:6]
 
 
 max_depth = 20
@@ -32,8 +32,10 @@ regressor = RandomForestRegressor(n_estimators=best_hyperparams[1],
                                     random_state=0)
 
 regressor.fit(X_train, y_train)
-result = regressor.predict(X_test)
 
-print_RMSE_MAE(y_test, result)
+# Predict
+result = regressor.predict(X_val)
+print_RMSE_MAE(y_val, result)
+
 save_model(regressor, 'mclab_forest.sav')
 save_model(results, 'mclab_forest_hiperp.sav')

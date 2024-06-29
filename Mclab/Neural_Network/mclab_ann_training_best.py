@@ -4,7 +4,7 @@ from utils import print_RMSE_MAE, save_model, import_dataset_mclab
 from keras.models import Sequential
 from keras.layers import Dense
 
-X_train, X_test, y_train, y_test = import_dataset_mclab()[:4]
+X_train, X_test, X_val, y_train, y_test, y_val = import_dataset_mclab()[:6]
 
 
 # create ANN model
@@ -26,8 +26,8 @@ model.compile(loss='mean_squared_error', optimizer='Adamax')
 history = model.fit(X_train, y_train, validation_split=.1, batch_size=100, epochs=20, verbose=0)
 
 
-result = model.predict(X_test)
-result = result.reshape(32765,)
+result = model.predict(X_val)
+result = result.reshape(13106,)
 
-print_RMSE_MAE(y_test, result)
+print_RMSE_MAE(y_val, result)
 save_model(model, 'mclab_ann_best.sav')

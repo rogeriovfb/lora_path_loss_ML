@@ -3,8 +3,9 @@ import xgboost as xg
 
 from utils import print_RMSE_MAE, save_model, import_dataset_medellin
 
-X_train_all_data, X_test_all_data, y_train_all_data, y_test_all_data, \
-X_train_relevant, X_test_relevant, y_train_relevant, y_test_relevant = import_dataset_medellin()[:8]
+X_train_all_data, X_test_all_data, X_val_all_data, y_train_all_data, y_test_all_data, y_val_all_data,\
+X_train_relevant, X_test_relevant, X_val_relevant, y_train_relevant, y_test_relevant, y_val_relevant = \
+    import_dataset_medellin()[:12]
 
 max_depth = 25
 max_estimators = 25
@@ -60,7 +61,7 @@ regressor_all_data = xg.XGBRegressor(n_estimators=best_hyperparams_all_data[1],
 regressor_all_data.fit(X_train_all_data, y_train_all_data)
 
 # Predict
-result_all_data = regressor_all_data.predict(X_test_all_data)
+result_all_data = regressor_all_data.predict(X_val_all_data)
 
 regressor_relevant = xg.XGBRegressor(n_estimators=best_hyperparams_relevant[1],
                                     max_depth=best_hyperparams_relevant[0],
@@ -70,12 +71,12 @@ regressor_relevant = xg.XGBRegressor(n_estimators=best_hyperparams_relevant[1],
 regressor_relevant.fit(X_train_relevant, y_train_relevant)
 
 # Predict
-result_relevant = regressor_relevant.predict(X_test_relevant)
+result_relevant = regressor_relevant.predict(X_val_relevant)
 
 print("All Data:")
-print_RMSE_MAE(y_test_all_data, result_all_data)
+print_RMSE_MAE(y_val_all_data, result_all_data)
 print("Relevant Factors:")
-print_RMSE_MAE(y_test_relevant, result_relevant)
+print_RMSE_MAE(y_val_relevant, result_relevant)
 
 save_model(regressor_all_data, 'medellin_xgboost_all_data.sav')
 save_model(regressor_relevant, 'medellin_xgboost_relevant.sav')

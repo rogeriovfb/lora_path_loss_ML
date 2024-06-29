@@ -3,7 +3,7 @@ import numpy as np
 from utils import print_RMSE_MAE, save_model, import_dataset_mclab
 from sklearn.linear_model import Lasso
 
-X_train, X_test, y_train, y_test = import_dataset_mclab()[:4]
+X_train, X_test, X_val, y_train, y_test, y_val = import_dataset_mclab()[:6]
 
 
 results = dict()
@@ -29,7 +29,8 @@ regressor = Lasso(alpha=0.01)
 regressor.fit(X_train, y_train)
 
 # Predict
-result = regressor.predict(X_test)
-print_RMSE_MAE(y_test,result)
+result = regressor.predict(X_val)
+print_RMSE_MAE(y_val, result)
+
 save_model(regressor, 'mclab_lasso.sav')
 save_model(results, 'mclab_lasso_hiperp.sav')

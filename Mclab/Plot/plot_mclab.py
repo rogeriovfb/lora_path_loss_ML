@@ -87,7 +87,7 @@ def plot_hiperp_2D(results_file, title='', xlabel=''):
     min_rmse_index = np.argmin(error_list)
     min_rmse_alpha = x_values[min_rmse_index]
     min_rmse_value = error_list[min_rmse_index]
-    plt.scatter(min_rmse_alpha, min_rmse_value, color='red', marker='*', s=200, label='Menor RMSE')
+    plt.scatter(min_rmse_alpha, min_rmse_value, color='red', marker='*', s=200, label='Best RMSE')
 
     # Adicionar texto com o valor da coordenada do ponto mínimo
     plt.text(min_rmse_alpha, min_rmse_value, f'({min_rmse_alpha:.2f}, {min_rmse_value:.2f})', fontsize=12,
