@@ -6,8 +6,9 @@ import joblib
 
 
 def plot_IA_model(file_model, modelo):
-    X_train_all, X_test_all, y_train_all, y_test_all, X_train_relevant, X_test_relevant, \
-    y_train_relevant, y_test_relevant, scaler_all, scaler_sig = import_dataset_medellin()
+    X_train_all, X_test_all, X_val_all, y_train_all, y_test_all, y_val_all,\
+    X_train_relevant, X_test_relevant, X_val_relevant, y_train_relevant, y_test_relevant, y_val_relevant, \
+    scaler_all, scaler_sig = import_dataset_medellin()
 
     model = joblib.load(file_model)
     result = model.predict(X_test_relevant)
@@ -31,9 +32,9 @@ def plot_IA_model(file_model, modelo):
     scatter2 = ax.scatter(X_test_relevant[:, 0]/1000, result, marker='*', color='red', label='Predição', s=50, alpha=0.3)
 
     # Adicionando legendas e rótulos aos eixos com tamanhos maiores de fonte
-    ax.set_xlabel('Distância [km]', fontsize=16)
-    ax.set_ylabel('Perda por Propagação [dB]', fontsize=16)
-    ax.set_title('Predição utilizando {}'.format(modelo), fontsize=18)
+    ax.set_xlabel('Distância [km]', fontsize=18)
+    ax.set_ylabel('Perda por Propagação [dB]', fontsize=18)
+    ax.set_title('Predição utilizando {}'.format(modelo), fontsize=20)
 
     # Adicionando grid
     ax.grid(True, linestyle='--', alpha=0.5)
@@ -43,7 +44,7 @@ def plot_IA_model(file_model, modelo):
     legend_elements = [Line2D([0], [0], marker='o', color='w', label='{}'.format(int(elevacao)),
                               markerfacecolor=mapa_cores(normalizador(elevacao)), markersize=10)
                        for elevacao in unique_sf]
-    ax.legend(handles=legend_elements, title='Fator de Espalhamento (SF)', fontsize=14, title_fontsize='large')
+    ax.legend(handles=legend_elements, title='Fator de Espalhamento (SF)', fontsize=16, title_fontsize='large')
 
     print_RMSE_MAE(y_test_relevant, result)
 

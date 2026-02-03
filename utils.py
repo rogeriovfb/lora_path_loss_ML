@@ -92,102 +92,125 @@ def import_dataset_medellin():
 def plot_medellin_dataframe():
     dataset = import_dataset_medellin_raw()
 
-    # Colunas que você quer plotar como histogramas
-    X_col = ['distance', 'hora', 'ht', 'frequency', 'sf', 'frame_length', 'temperature', 'rh', 'bp', 'pm2_5', 'toa']
+    # Criar uma figura para os três primeiros gráficos
+    fig1, axs1 = plt.subplots(nrows=1, ncols=3, figsize=(18, 7))
 
-    # Listas para títulos e rótulos do eixo x
-    titles = ['Distância', 'Hora', 'Altura Transmissor', 'Frequência', 'SF', 'Frame Length', 'Temperatura', 'Umidade Relativa', 'Pressão atm.', 'PM2.5', 'Time on Air']
-    x_labels = ['Distância [km]', 'Hora', 'Altura [m]', 'Frequência [Hz]', 'SF', 'Frame Length [bytes]', 'Temperatura [°C]', 'Umidade[%]', 'Pressão [hPa]', 'PM2.5 [μg/m^3]',
-                'TOA [s]']
-
-    # Configurações padrão de estilo Seaborn
-    sns.set(style='whitegrid')
-
-    # Ajustando o tamanho das fontes
-    plt.rcParams.update({'font.size': 14})  # Definindo o tamanho da fonte para 14 pontos
-
-    # Calcular o número de linhas e colunas para os subplots
-    num_cols = 3  # Defina o número de colunas desejado
-    num_rows = (len(X_col) + num_cols - 1) // num_cols  # Calcula o número de linhas necessário
-
-    # Criar uma figura e os subplots usando Seaborn
-    fig, axs = plt.subplots(nrows=num_rows, ncols=num_cols, figsize=(18, 7 * num_rows))
+    # Colunas, títulos e rótulos para os três gráficos
+    X_col_1 = ['distance', 'ht', 'experimental_pl']
+    titles_1 = ['Distância', 'Altura Transmissor', 'Perda por Propagação']
+    x_labels_1 = ['Distância [km]', 'Altura [m]', 'Perda por Propagação [dB]']
 
     # Iterar sobre cada coluna e plotar o histograma usando Seaborn
-    for i, col in enumerate(X_col):
-        row = i // num_cols
-        col_index = i % num_cols
-        sns.histplot(dataset[col].dropna(), color='blue', ax=axs[row, col_index])
-        sns.histplot(dataset[col].dropna(), kde=True, color='black', ax=axs[row, col_index])
-        axs[row, col_index].set_ylabel('Amostras', fontsize=14)
-        axs[row, col_index].set_title(f'Histograma de {titles[i]}', fontsize=16)  # Título com fonte maior
-        axs[row, col_index].set_xlabel(x_labels[i], fontsize=14)  # Rótulo do eixo x com fonte maior
+    for i, col in enumerate(X_col_1):
+        sns.histplot(dataset[col].dropna(), color='blue', ax=axs1[i])
+        sns.histplot(dataset[col].dropna(), kde=True, color='black', ax=axs1[i])
+        axs1[i].set_ylabel('Amostras', fontsize=14)
+        axs1[i].set_title(f'Distribuição de {titles_1[i]}', fontsize=16)
+        axs1[i].set_xlabel(x_labels_1[i], fontsize=14)
 
-    # Remover subplots não utilizados, se houver
-    if len(X_col) < num_rows * num_cols:
-        for i in range(len(X_col), num_rows * num_cols):
-            fig.delaxes(axs[i // num_cols, i % num_cols])
+    # Ajustar o espaçamento
+    plt.subplots_adjust(left=0.1, bottom=0.1, right=0.9, top=0.9, wspace=0.4, hspace=0.4)
 
-    # Ajustar o espaçamento entre subplots
-    plt.subplots_adjust(left=0.24, bottom=0.064, right=0.75, top=0.95, wspace=0.41, hspace=0.53)  # Ajusta os espaçamentos superior e inferior entre os subplots
+    # Criar uma figura para os gráficos restantes
+    fig2, axs2 = plt.subplots(nrows=3, ncols=3, figsize=(18, 21))
+
+    # Colunas, títulos e rótulos para os gráficos restantes
+    X_col_2 = ['hora', 'frequency', 'sf', 'frame_length', 'temperature', 'rh', 'bp', 'pm2_5', 'toa']
+    titles_2 = ['Hora', 'Frequência', 'SF', 'Frame Length', 'Temperatura', 'Umidade Relativa', 'Pressão atm.', 'PM2.5',
+                'Time on Air']
+    x_labels_2 = ['Hora', 'Frequência [Hz]', 'SF', 'Frame Length [bytes]', 'Temperatura [°C]', 'Umidade [%]',
+                  'Pressão [hPa]', 'PM2.5 [μg/m^3]', 'TOA [s]']
+
+    # Iterar sobre cada coluna e plotar o histograma usando Seaborn
+    for i, col in enumerate(X_col_2):
+        row = i // 3
+        col_index = i % 3
+        sns.histplot(dataset[col].dropna(), color='blue', ax=axs2[row, col_index])
+        sns.histplot(dataset[col].dropna(), kde=True, color='black', ax=axs2[row, col_index])
+        axs2[row, col_index].set_ylabel('Amostras', fontsize=14)
+        axs2[row, col_index].set_title(f'Distribuição de {titles_2[i]}', fontsize=16)
+        axs2[row, col_index].set_xlabel(x_labels_2[i], fontsize=14)
+
+    # Ajustar o espaçamento
+    plt.subplots_adjust(left=0.1, bottom=0.1, right=0.9, top=0.9, wspace=0.4, hspace=0.4)
 
 
 def plot_mclab_dataframe():
-    # Carregando o DataFrame a partir do arquivo zip
+    # --------------------------------------------------------
+    # Load dataset
+    # --------------------------------------------------------
     zf = zipfile.ZipFile('..\\..\\Data\\dataset_mclab.zip')
     df = pd.read_csv(zf.open('dataset_mclab.csv'))
 
-    # Configurando o estilo dos gráficos utilizando o seaborn
+    # --------------------------------------------------------
+    # Global style configuration (consistent with other figures)
+    # --------------------------------------------------------
     sns.set(style="whitegrid")
 
-    # Ajustando o tamanho das fontes
-    plt.rcParams.update({'font.size': 14})  # Definindo o tamanho da fonte para 14 pontos
+    plt.rcParams.update({
+        "font.family": "sans-serif",
+        "font.sans-serif": ["DejaVu Sans"],
+        "font.size": 15,
+        "axes.titlesize": 16,
+        "axes.labelsize": 15,
+        "xtick.labelsize": 13,
+        "ytick.labelsize": 13
+    })
 
-    # Criando subplots para os gráficos
+    # --------------------------------------------------------
+    # Create subplots
+    # --------------------------------------------------------
     fig, axes = plt.subplots(2, 2, figsize=(12, 10))
 
-    # Histograma para 'distance' com barras azuis
-    sns.histplot(df['distance'], color='blue', ax=axes[0, 0])
-    axes[0, 0].set_title('Distribuição de Distância', fontsize=16)
-    axes[0, 0].set_xlabel('Distância [km]', fontsize=14)
-    axes[0, 0].set_ylabel('Amostras', fontsize=14)
-
-    # Gráfico de densidade (kde) para 'distance' com linha preta
+    # --------------------------------------------------------
+    # Distance distribution
+    # --------------------------------------------------------
+    sns.histplot(df['distance'], color='dodgerblue', ax=axes[0, 0])
     sns.histplot(df['distance'], kde=True, color='black', ax=axes[0, 0])
 
-    # Histograma para 'elevations' com barras azuis
-    sns.histplot(df['elevations'], color='blue', ax=axes[0, 1])
-    axes[0, 1].set_title('Distribuição de Elevações', fontsize=16)
-    axes[0, 1].set_xlabel('Elevações [m]', fontsize=14)
-    axes[0, 1].set_ylabel('Amostras', fontsize=14)
+    axes[0, 0].set_title('Distance Distribution')
+    axes[0, 0].set_xlabel('Distance [km]')
+    axes[0, 0].set_ylabel('Samples')
 
-    # Gráfico de densidade (kde) para 'elevations' com linha preta
+    # --------------------------------------------------------
+    # Elevation distribution
+    # --------------------------------------------------------
+    sns.histplot(df['elevations'], color='dodgerblue', ax=axes[0, 1])
     sns.histplot(df['elevations'], kde=True, color='black', ax=axes[0, 1])
 
-    # Histograma para 'antenna_height' com barras azuis
-    sns.histplot(df['antenna_height'], color='blue', ax=axes[1, 0])
-    axes[1, 0].set_title('Distribuição de Altura da Antena', fontsize=16)
-    axes[1, 0].set_xlabel('Altura da Antena [m]', fontsize=14)
-    axes[1, 0].set_ylabel('Amostras', fontsize=14)
+    axes[0, 1].set_title('Elevation Distribution')
+    axes[0, 1].set_xlabel('Elevation [m]')
+    axes[0, 1].set_ylabel('Samples')
 
-    # Gráfico de densidade (kde) para 'antenna_height' com linha preta
+    # --------------------------------------------------------
+    # Antenna height distribution
+    # --------------------------------------------------------
+    sns.histplot(df['antenna_height'], color='dodgerblue', ax=axes[1, 0])
     sns.histplot(df['antenna_height'], kde=True, color='black', ax=axes[1, 0])
 
-    # Histograma para 'path_loss' com barras azuis
-    sns.histplot(df['path_loss'], color='blue', ax=axes[1, 1])
-    axes[1, 1].set_title('Distribuição de Perda por propagação', fontsize=16)
-    axes[1, 1].set_xlabel('Perda por propagação [dB]', fontsize=14)
-    axes[1, 1].set_ylabel('Amostras', fontsize=14)
+    axes[1, 0].set_title('Antenna Height Distribution')
+    axes[1, 0].set_xlabel('Antenna Height [m]')
+    axes[1, 0].set_ylabel('Samples')
 
-    # Gráfico de densidade (kde) para 'path_loss' com linha preta
+    # --------------------------------------------------------
+    # Path loss distribution
+    # --------------------------------------------------------
+    sns.histplot(df['path_loss'], color='dodgerblue', ax=axes[1, 1])
     sns.histplot(df['path_loss'], kde=True, color='black', ax=axes[1, 1])
 
-    # Aumentando o contraste das linhas nos gráficos de densidade
-    for ax in axes.flatten():
-        for spine in ax.spines.values():
-            spine.set_linewidth(2)  # Definindo a largura das linhas para 1.5
-            spine.set_edgecolor('black')  # Definindo a cor das linhas como preto
+    axes[1, 1].set_title('Path Loss Distribution')
+    axes[1, 1].set_xlabel('Path Loss [dB]')
+    axes[1, 1].set_ylabel('Samples')
 
-    # Ajustando o layout para evitar sobreposição
+    # --------------------------------------------------------
+    # Layout and save
+    # --------------------------------------------------------
     plt.tight_layout()
+
+    plt.savefig(
+        'fig1_dataset_feature_distributions.png',
+        dpi=300,
+        bbox_inches='tight'
+    )
+
     plt.show()
