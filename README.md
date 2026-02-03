@@ -1,6 +1,24 @@
 # Path Loss Prediction Using Machine Learning in LoRa Network
 In this study, we aim to explore and compare different machine learning (ML) algorithms for predicting path loss in LoRa networks. By leveraging datasets collected from real-world deployments, we seek to develop robust predictive models that can accurately estimate path loss under different environmental conditions and network configurations. The datasets used in our experiments are available in the Data Folder of this repository. These datasets contain measurements obtained from stationary gateways and mobile GPS end nodes across urban environments
 
+## Citation
+
+If you use this code, models, or any part of this repository in your research, please cite the following paper:
+
+```bibtex
+@inproceedings{Ballestrin2024,
+  title = {Exploring Machine Learning Techniques for Path Loss Prediction in LoRa Networks},
+  url = {http://dx.doi.org/10.1109/ISWCS61526.2024.10639055},
+  DOI = {10.1109/iswcs61526.2024.10639055},
+  booktitle = {2024 19th International Symposium on Wireless Communication Systems (ISWCS)},
+  publisher = {IEEE},
+  author = {Ballestrin, Rog{\'e}rio and Feij{\'o}, Jonas Freitas and Feldman, Max and M{\"u}ller, Ivan},
+  year = {2024},
+  month = jul,
+  pages = {1--6}
+}
+```
+
 ## Installation
 To get started, you'll need to have Python and pip installed on your system. 
 
